@@ -1,42 +1,36 @@
 ---
-title: "Filing Bugs"
-linkTitle: "Filing Bugs"
+title: "提交 Bug 报告"
+linkTitle: "提交 Bug 报告"
 type: docs
 weight: 10
 description: >
-    How to file bugs and fix Kustomize bugs
+    如何提交 Bug 并修复 Kustomize 的问题
 ---
 
 
 [krusty package]: https://github.com/kubernetes-sigs/kustomize/tree/master/api/krusty
 [reusable custom transformer test]: https://github.com/kubernetes-sigs/kustomize/tree/master/api/krusty/customconfigreusable_test.go
 
-File issues as desired, but if you've found a problem
-with how `kustomize build` works, please report
+您可以根据需要提交 Issue，但如果您发现了有关 `kustomize build` 工作方式的问题，请务必提供以下信息以便我们定位问题：
 
-* the output of `kustomize version`,
-* the input (the content of `kustomization.yaml`
-   and any files it refers to),
-* the expected YAML output.
+* `kustomize version` 命令的输出结果,
+* 输入内容（包括 `kustomization.yaml` 文件及其引用的所有相关文件），
+* 您期望生成的 `YAML` 格式的内容。
 
-## If you have `go` installed
+## 如果您已安装了 `go` 环境
 
-kustomize has a simple test harness in the [krusty
-package] for specifying a kustomization's input and the
-expected output.
+Kustomize 在 [krusty
+package] 包中提供了一个简易的测试框架，用于指定 kustomization 文件的输入及您期望输出的内容。
 
-Copy one of those tests, e.g. this [reusable custom
-transformer test], to a new test file in the
-krusty package.
+你可以复制其中一个测试用例，例如复制这个[可复用自定义转换器测试用例]，并将其粘贴为 krusty 包中的一个新测试文件。
 
-Insert the inputs you want to use, and run it as
-you'd run the reusable custom transformer test:
+插入你想用的输入，然后运行它：
 
 ```
 (cd api; go test -run TestReusableCustomTransformers ./krusty)
 ```
 
-The output will demonstrate the bug or missing feature.
+命令的输出会显示bug和缺失的功能。
 
 Record this output in the test file in a call to
 `AssertActualEqualsExpected`, per all the other tests
